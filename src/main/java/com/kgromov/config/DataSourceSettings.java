@@ -12,7 +12,7 @@ public class DataSourceSettings {
     private String password;
 
     // jdbc:mysql://localhost:3306/weather_archive
-    public String connectionString() {
+    public String getConnectionString() {
         return uri + '/' + dbName;
     }
 }
