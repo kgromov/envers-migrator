@@ -9,5 +9,6 @@ import java.util.List;
 @Builder
 public class TableMetadata {
     private final String name;
+    private final String sourceName;
     private final List<ColumnMetadata> columns;
 }

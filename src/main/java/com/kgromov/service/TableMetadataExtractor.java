@@ -39,6 +39,7 @@ public class TableMetadataExtractor {
                 ColumnMetadata baseColumn = ColumnMetadata.builder()
                         .name(columnName)
                         .type(columnType)
+                        .primaryKey(isPK)
                         .build();
                 columns.add(baseColumn);
 
@@ -46,12 +47,14 @@ public class TableMetadataExtractor {
                     ColumnMetadata auditColumn = ColumnMetadata.builder()
                             .name(columnName.replace("_id", "") + "Modified")
                             .type("boolean")
+                            .modifiedColumn(true)
                             .build();
                     columns.add(auditColumn);
                 }
             }
             TableMetadata tableMetadata = TableMetadata.builder()
-                    .name(tableName)
+                    .name(tableName + "Audit")
+                    .sourceName(tableName)
                     .columns(columns)
                     .build();
             return tableMetadata;
@@ -83,11 +86,10 @@ public class TableMetadataExtractor {
                         .build();
                 columns.add(column);
             }
-            TableMetadata tableMetadata = TableMetadata.builder()
+            return TableMetadata.builder()
                     .name(tableName)
                     .columns(columns)
                     .build();
-            return tableMetadata;
         }
     }
 
